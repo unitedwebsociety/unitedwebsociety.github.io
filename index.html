@@ -1,25 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Hello World</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>United Web Society</title>
+  <meta name="robots" content="index,follow">
+  <meta property="og:site_name" content="United Web Society">
+  <meta property="og:locale" content="en_US">
+  <meta name="title" content="United Web Society — Where Technology Serves Humanity">
+  <meta name="description" content="United Web Society unites people across borders and cultures, where technology serves humanity and business drives shared progress, not just profit.">
+  <link rel="canonical" href="https://www.unitedwebsociety.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.unitedwebsociety.com/">
+  <meta property="og:title" content="United Web Society — Where Technology Serves Humanity">
+  <meta property="og:description" content="United Web Society unites people across borders and cultures, where technology serves humanity and business drives shared progress, not just profit.">
+
+  <meta name="keywords" content="United Web Society, Web Society">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "United Web Society",
+    "url": "https://www.unitedwebsociety.com/",
+    "logo": "https://www.unitedwebsociety.com/logo.png",
+    "sameAs": [
+      "https://www.youtube.com/@unitedwebsociety",
+      "https://www.instagram.com/unitedwebsociety",
+      "https://www.tiktok.com/@uniwebsociety",
+      "https://www.threads.com/@unitedwebsociety",
+      "https://x.com/uniwebsociety",
+      "https://www.linkedin.com/company/united-web-society",
+      "https://www.facebook.com/unitedwebsociety"
+    ]
+  }
+  </script>
+
   <style>
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+
+      --youtube: #ff0000;
+      --facebook: #1877f2;
+      --reddit: #ff4500;
+      --x: #000000;
+      --instagram: #e1306c;
+      --linkedin: #0a66c2;
+
+      --tiktok: #010101;
+      --discord: #5865F2;
+      --telegram: #229ED9;
+      --whatsapp: #25D366;
+      --threads: #000000;
+
+      --radius: 999px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      font-family: system-ui, sans-serif;
+      padding: 1.2rem;
+      gap: 1.2rem;
+      position: relative;
+      overflow-x: hidden;
+      /* extra safety for long strings on small screens */
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* --- Canvas particle background --- */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;          /* behind content */
+      pointer-events: none; /* don't block clicks */
+      opacity: 0.9;
+    }
+
+    #call-to-unite { margin-top: -1.2rem; }
+
+    /* ---------- LOGO + MENU ---------- */
+    .logo-top {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f4f4f4;
+      gap: 2rem;
+      margin-top: 0.5rem;
     }
-    h1 {
-      color: #333;
+
+    .logo-top img {
+      width: min(230px, 55vw);
+      height: auto;
+      filter: drop-shadow(0 0 35px rgba(0, 153, 255, 0.35));
+    }
+
+    .main-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-align: left;
+      font-size: 0.95rem;
+      width: 100%;
+      max-width: 354px;
+    }
+
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.04);
+      transition: 0.15s;
+      white-space: normal; /* allow wrapping on small screens */
+      line-height: 1.25;
+	  font-weight: 600;
+    }
+
+    .main-nav a:hover {
+      transform: translateX(4px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    @media (max-width: 700px) {
+      body { padding: 1rem; }
+      .logo-top { flex-direction: column; gap: 1rem; }
+      .main-nav {
+        margin-top: 0;
+        text-align: center;
+        max-width: 520px;
+      }
+      .main-nav a {
+        width: 100%;
+        justify-content: center;
+        padding: 0.55rem 0.9rem;
+      }
+    }
+	
+	@media (max-width: 400px) {
+      .main-nav {
+        font-weight: 400;
+      }
+    }
+	
+	
+
+    .tagline {
+      font-size: clamp(1.05rem, 3.4vw, 1.6rem);
+      font-weight: 600;
+      opacity: 0.9;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+      line-height: 1.45;
+    }
+
+    /* ---------- GRID SYSTEM ---------- */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.5rem auto 0 auto;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    @media (max-width: 900px) {
+      .button-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .button-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .btn { font-size: 1.05rem; padding: 0.9rem 0.7rem; }
+    }
+
+    @media (max-width: 380px) {
+      .button-grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+    }
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0.8rem;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      color: white;
+      transition: 0.15s;
+      min-height: 48px; /* better tap target on mobile */
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* avoid “jumpiness” on touch devices */
+    @media (hover: none) {
+      .btn:hover { transform: none; filter: none; }
+      .main-nav a:hover { transform: none; }
+    }
+
+    .youtube  { background: var(--youtube); }
+    .facebook { background: var(--facebook); }
+    .reddit   { background: var(--reddit); }
+    .x        { background: var(--x); border: 1px solid #444; }
+    .instagram{ background: var(--instagram); }
+    .linkedin { background: var(--linkedin); }
+    .tiktok   { background: var(--tiktok); border: 1px solid #333; }
+    .discord  { background: var(--discord); }
+    .telegram { background: var(--telegram); }
+    .whatsapp { background: var(--whatsapp); }
+    .threads  { background: var(--threads); border: 1px solid #444; }
+
+    footer {
+      margin-top: auto;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      padding-bottom: 0.5rem;
+    }
+
+    /* ---------- PHASE BAR ---------- */
+    .phase-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0 1rem;
+      width: 100%;
+      gap: 0.8rem;
+    }
+
+    .phase-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.35);
+      min-width: 24px;
+    }
+
+    .phase-text {
+      margin: 0;
+      font-size: clamp(0.95rem, 3.6vw, 1.3rem);
+      font-weight: 600;
+      color: #ffffff;
+      white-space: normal; /* allow wrap on small screens */
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .video-normal {
+      margin: 0 auto 1.5rem auto;
+      max-width: 1150px;
+      width: 100%;
+    }
+
+    .video-normal iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border: none;
+      border-radius: 14px;
+    }
+
+    /* ---------- BLOG PREVIEW SECTION ---------- */
+    .blog-section {
+      max-width: 1200px;
+      margin: 2.5rem auto 0 auto;
+      text-align: left;
+    }
+
+    .blog-section-title {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .blog-section-subtitle {
+      font-size: 0.98rem;
+      opacity: 0.8;
+      margin-bottom: 1.6rem;
+      max-width: 700px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 900px) {
+      .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 600px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+
+    .blog-card {
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.08), rgba(0,0,0,0.9));
+      padding: 1rem 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .blog-meta {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.6;
+    }
+
+    .blog-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .blog-card-excerpt {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .blog-card a.read-link {
+      margin-top: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #4da8ff;
+    }
+
+    .blog-card a.read-link:hover { text-decoration: underline; }
+
+    /* ---------- BLOG LINKS ---------- */
+    .blog-links {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .blog-link-row { margin-bottom: 0.9rem; }
+
+    .blog-link-btn {
+      display: inline-block;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.18);
+      transition: 0.15s;
+      max-width: 100%;
+    }
+
+    .blog-link-btn:hover {
+      transform: translateX(4px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    @media (max-width: 420px) {
+      .blog-link-btn { display: block; text-align: center; }
+      .tagline { text-align: left; }
     }
   </style>
 </head>
+
 <body>
-  <h1>Hello, World!</h1>
+  <!-- Particle web background -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <div class="logo-top">
+    <a href="https://www.unitedwebsociety.com">
+      <img src="logo.png" alt="United Web Society Home" />
+    </a>
+    <nav class="main-nav">
+      <a href="#call-to-unite">1. Building a Web Society — The Call to Unite</a>
+      <a href="https://www.webofobjects.com/#web-reinvented">2. Reinventing the Web — Web of Objects</a>
+      <a href="https://www.webofobjects.com/#blog">3. Blog</a>
+    </nav>
+  </div>
+
+  <section id="call-to-unite">
+    <div class="phase-wrapper">
+      <div class="phase-line"></div>
+      <div class="phase-text">1. Building a Web Society — The Call to Unite</div>
+      <div class="phase-line"></div>
+    </div>
+
+    <div class="video-normal">
+      <iframe
+        src="https://www.youtube.com/embed/DtJehFUaftY?vq=hd1080&rel=0&modestbranding=1"
+        title="YouTube video player"
+        width="560"
+        height="315"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="button-grid">
+      <a class="btn youtube" href="https://www.youtube.com/@unitedwebsociety" target="_blank" rel="noopener">YouTube</a>
+      <a class="btn instagram" href="https://www.instagram.com/unitedwebsociety" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn tiktok" href="https://www.tiktok.com/@uniwebsociety" target="_blank" rel="noopener">TikTok</a>
+      <a class="btn threads" href="https://www.threads.com/@unitedwebsociety" target="_blank" rel="noopener">Threads</a>
+      <a class="btn x" href="https://x.com/uniwebsociety" target="_blank" rel="noopener">X</a>
+      <a class="btn linkedin" href="https://www.linkedin.com/company/united-web-society" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn facebook" href="https://www.facebook.com/unitedwebsociety" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </section>
+
+
+  <footer>
+    © 2026 WisdomHunt SRL. All rights reserved.<br>
+  </footer>
+
+  <!-- Particle Web Background Script -->
+  <script>
+  (() => {
+    const canvas = document.getElementById("bg-canvas");
+    const ctx = canvas.getContext("2d", { alpha: true });
+
+    // ---- Tweakables ----
+    const CFG = {
+      density: 0.00008,
+      maxParticles: 140,
+      minParticles: 45,
+      speed: 0.35,
+      dotRadius: 1.2,
+      linkDist: 120,
+      mouseLinkDist: 160,
+      lineWidth: 1,
+      dotColor: "255,255,255",
+      lineColor: "77,168,255",
+      dotAlpha: 0.55
+    };
+
+    // Mobile performance tuning (small screens + typically weaker GPUs)
+    const vw = Math.min(window.innerWidth || 0, window.innerHeight || 0);
+    if (vw && vw < 420) {
+      CFG.maxParticles = 85;
+      CFG.minParticles = 28;
+      CFG.linkDist = 95;
+      CFG.mouseLinkDist = 120;
+      CFG.speed = 0.28;
+      CFG.dotRadius = 1.05;
+    }
+
+    let w = 0, h = 0, dpr = 1;
+    let particles = [];
+    const mouse = { x: null, y: null, active: false };
+
+    function makeParticle() {
+      const angle = Math.random() * Math.PI * 2;
+      const sp = CFG.speed * (0.6 + Math.random() * 0.8);
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: Math.cos(angle) * sp,
+        vy: Math.sin(angle) * sp
+      };
+    }
+
+    function resize() {
+      dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      w = canvas.clientWidth = window.innerWidth;
+      h = canvas.clientHeight = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const target = Math.round(w * h * CFG.density);
+      const count = Math.max(CFG.minParticles, Math.min(CFG.maxParticles, target));
+
+      if (particles.length < count) {
+        for (let i = particles.length; i < count; i++) particles.push(makeParticle());
+      } else if (particles.length > count) {
+        particles.length = count;
+      }
+    }
+
+    function step() {
+      ctx.clearRect(0, 0, w, h);
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        if (p.y < -10) p.y = h + 10;
+        if (p.y > h + 10) p.y = -10;
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
+
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, CFG.dotRadius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${CFG.dotColor},${CFG.dotAlpha})`;
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist > CFG.linkDist) continue;
+
+          const alpha = (1 - dist / CFG.linkDist) * 0.35;
+          ctx.strokeStyle = `rgba(${CFG.lineColor},${alpha})`;
+          ctx.lineWidth = CFG.lineWidth;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+
+        if (mouse.active && mouse.x != null) {
+          const dx = a.x - mouse.x;
+          const dy = a.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < CFG.mouseLinkDist) {
+            const alpha = (1 - dist / CFG.mouseLinkDist) * 0.5;
+            ctx.strokeStyle = `rgba(${CFG.lineColor},${alpha})`;
+            ctx.lineWidth = CFG.lineWidth;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    // Mouse + touch tracking
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    }, { passive: true });
+
+    window.addEventListener("mouseleave", () => { mouse.active = false; });
+
+    window.addEventListener("touchstart", () => { mouse.active = true; }, { passive: true });
+    window.addEventListener("touchmove", (e) => {
+      const t = e.touches && e.touches[0];
+      if (!t) return;
+      mouse.x = t.clientX;
+      mouse.y = t.clientY;
+    }, { passive: true });
+    window.addEventListener("touchend", () => { mouse.active = false; }, { passive: true });
+
+    // Reduce motion accessibility
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      CFG.speed = 0.12;
+      CFG.maxParticles = Math.min(CFG.maxParticles, 80);
+      CFG.linkDist = Math.min(CFG.linkDist, 95);
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+    step();
+  })();
+  </script>
 </body>
 </html>
