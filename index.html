@@ -308,8 +308,16 @@
       border-radius: 14px;
     }
 	
-	.video-normal iframe {
-  transform: translateZ(0);
+.video-normal iframe{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
+  border-radius: 14px;
+
+  /* Fix color/gamma shifts when overlays appear */
+  isolation: isolate;
+  transform: translate3d(0,0,0);
   backface-visibility: hidden;
   will-change: transform;
 }
