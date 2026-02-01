@@ -304,19 +304,17 @@
 .video-wrap{
   border-radius: 14px;
   overflow: hidden;
-
-  /* keeps rendering consistent */
   transform: translate3d(0,0,0);
   isolation: isolate;
+  backface-visibility: hidden; /* add */
 }
 
 .video-wrap iframe{
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
+  height: auto;   /* add this */
   border: 0;
-
-  /* extra stability */
   backface-visibility: hidden;
   will-change: transform;
 }
