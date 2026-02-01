@@ -301,16 +301,22 @@
     }
 
 	
-.video-normal iframe{
+.video-wrap{
+  border-radius: 14px;
+  overflow: hidden;
+
+  /* keeps rendering consistent */
+  transform: translate3d(0,0,0);
+  isolation: isolate;
+}
+
+.video-wrap iframe{
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  height: auto;
-  border: none;
-  border-radius: 14px;
+  border: 0;
 
-  /* Fix color/gamma shifts when overlays appear */
-  isolation: isolate;
-  transform: translate3d(0,0,0);
+  /* extra stability */
   backface-visibility: hidden;
   will-change: transform;
 }
@@ -345,17 +351,16 @@
   <section id="call-to-unite">
 
 
-    <div class="video-normal">
-      <iframe
-        src="https://www.youtube.com/embed/DtJehFUaftY?vq=hd1080&rel=0&modestbranding=1"
-        title="YouTube video player"
-        width="560"
-        height="315"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-    </div>
+<div class="video-normal">
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/DtJehFUaftY?rel=0&modestbranding=1&playsinline=1&vq=hd1080"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
 
     <div class="button-grid">
       <a class="btn youtube" href="https://www.youtube.com/@webofobjects" target="_blank" rel="noopener">YouTube</a>
