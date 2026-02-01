@@ -307,6 +307,12 @@
       border: none;
       border-radius: 14px;
     }
+	
+	.video-normal iframe {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
   </style>
 </head>
 
@@ -328,7 +334,6 @@
            data-scroll="call-to-unite"
            role="button"
            aria-controls="call-to-unite">1. Web Society</a>
-
         <a href="https://webofobjects.com">2. Web of Objects</a>
         <a href="https://webverse.global">3. Webverse</a>
         <a href="https://buildwithai.academy">4. Build With AI Academy</a>
