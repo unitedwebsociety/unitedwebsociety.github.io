@@ -159,6 +159,7 @@
       white-space: normal;
       line-height: 1.25;
       font-weight: 600;
+      cursor: pointer; /* because we prevent default on the first item */
     }
 
     .main-nav a:hover {
@@ -168,8 +169,6 @@
 
     @media (max-width: 700px) {
       body { padding: 1rem; }
-
-      /* menu goes under the logo image */
       .logo-top { flex-direction: column; gap: 1rem; }
 
       .main-nav {
@@ -323,11 +322,16 @@
         <img src="logo.png" alt="Web Society Home" />
       </a>
 
-      <nav class="main-nav">
-        <a href="#call-to-unite">1. Web Society</a>
+      <!-- ✅ UPDATED NAV: first item no longer uses #hash -->
+      <nav class="main-nav" aria-label="Site navigation">
+        <a href="/"
+           data-scroll="call-to-unite"
+           role="button"
+           aria-controls="call-to-unite">1. Web Society</a>
+
         <a href="https://webofobjects.com">2. Web of Objects</a>
-		<a href="https://webverse.global">3. Webverse</a>
-		<a href="https://buildwithai.academy">4. Build With AI Academy</a>
+        <a href="https://webverse.global">3. Webverse</a>
+        <a href="https://buildwithai.academy">4. Build With AI Academy</a>
       </nav>
     </div>
   </header>
@@ -365,6 +369,33 @@
   <footer>
     © 2026 WEB SOCIETY. All rights reserved.<br>
   </footer>
+
+  <!-- ✅ NEW: hash-less smooth scrolling (only affects links with data-scroll) -->
+  <script>
+    (function () {
+      const headerOffset = 0; // set to your fixed header height if you ever add one
+      const links = document.querySelectorAll('.main-nav a[data-scroll]');
+
+      function scrollToId(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+
+        // optional accessibility: move focus for keyboard/screen readers
+        el.setAttribute('tabindex', '-1');
+        el.focus({ preventScroll: true });
+      }
+
+      links.forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault(); // prevents URL hash / navigation
+          scrollToId(a.dataset.scroll);
+        });
+      });
+    })();
+  </script>
 
   <!-- Particle Web Background Script -->
   <script>
