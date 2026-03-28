@@ -9,9 +9,9 @@
   <meta property="og:locale" content="en_US">
   <meta name="title" content="Web Society — Where Technology Serves Humanity">
   <meta name="description" content="Web Society develops breakthrough technologies that push humanity forward.">
-  <link rel="canonical" href="https://websociety.global">
+  <link rel="canonical" href="https://websociety.one">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://websociety.global">
+  <meta property="og:url" content="https://websociety.one">
   <meta property="og:title" content="Web Society — Where Technology Serves Humanity">
   <meta property="og:description" content="Web Society develops breakthrough technologies that push humanity forward.">
 
@@ -76,14 +76,14 @@
     #call-to-unite { margin-top: 1rem; }
 
     /* ---------- HEADER WRAPPER ---------- */
-    .site-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.1rem;
-      margin-top: 0.6rem;
-      width: 100%;
-    }
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  margin-top: 0.6rem;
+  width: 100%;
+}
 
     /* ---------- TOP CENTER BRAND TEXT ---------- */
     .brand-title {
@@ -295,6 +295,18 @@
   aspect-ratio:16/9;
   border:0;
 }
+.brand-title {
+  margin-bottom: 0.1rem; /* tighten space below title */
+}
+.tagline {
+  font-size: clamp(1.05rem, 3.4vw, 1.6rem);
+  font-weight: 600;
+  opacity: 0.9;
+  max-width: 1200px;
+  margin: 0 auto 0.4rem auto; /* remove top margin, small bottom margin */
+  text-align: center;
+  line-height: 1.3;
+}
   </style>
 </head>
 
@@ -303,10 +315,14 @@
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
   <header class="site-header">
-    <a href="https://websociety.global" class="brand-title">WEB SOCIETY</a>
+    <a href="https://websociety.one" class="brand-title">WEB SOCIETY</a>
+
+<div class="tagline" style="text-align:center; letter-spacing: 0.08em;">
+  One Planet. One Society.
+</div>
 
     <div class="logo-top">
-      <a href="https://websociety.global">
+      <a href="https://websociety.one">
         <img src="logo.png" alt="Web Society Home" />
       </a>
 
